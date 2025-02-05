@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Conta from "../Conta";
 import styled from "styled-components";
 import CampoTexto from "../CampoTexto";
 import { Cartao, CartaoCabecalho, CartaoCorpo } from "../Cartao";
 import Botao from "../Botao";
-import Modal from "../Modal";
+import Modal, { ModalHandle } from "../Modal";
 import Form from "../Form";
 import Label from "../Label";
 import Fieldset from "../Fieldset";
@@ -42,23 +42,11 @@ const contas = [
 ];
 
 const Contas = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [novaConta, setNovaConta] = useState({
     banco: "",
     saldo: 0,
   });
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const aoAdicionarConta = () => {
-    handleCloseModal();
-  };
+  const modalRef = useRef<ModalHandle>(null);
 
   return (
     <Cartao>
@@ -69,49 +57,47 @@ const Contas = () => {
             <Conta key={conta.id} banco={conta.banco} saldo={conta.saldo} />
           ))}
         </ListaMovimentacoes>
-        <Botao $variante="neutro" onClick={() => handleOpenModal()}>
+        <Botao $variante="neutro" onClick={() => modalRef.current?.open()}>
           <WalletIcon />
           Adicionar conta
         </Botao>
-        {isModalOpen && (
-          <Modal
-            aoFechar={() => handleCloseModal()}
-            estaAberta={isModalOpen}
-            aoClicar={() => aoAdicionarConta()}
-            titulo="Adicionar conta bancária"
-            icon={<WalletIcon />}
-          >
-            <Form>
-              <Fieldset>
-                <Label htmlFor="banco">Banco</Label>
-                <CampoTexto
-                  type="text"
-                  id="banco"
-                  placeholder="Ex: Anybank"
-                  value={novaConta.banco}
-                  onChange={(e) =>
-                    setNovaConta({ ...novaConta, banco: e.target.value })
-                  }
-                />
-              </Fieldset>
-              <Fieldset>
-                <Label htmlFor="saldo">Saldo</Label>
-                <CampoTexto
-                  type="number"
-                  id="saldo"
-                  placeholder="R$ 500,00"
-                  value={novaConta.saldo}
-                  onChange={(e) =>
-                    setNovaConta({
-                      ...novaConta,
-                      saldo: parseFloat(e.target.value),
-                    })
-                  }
-                />
-              </Fieldset>
-            </Form>
-          </Modal>
-        )}
+        <Modal
+          ref={modalRef}
+          titulo="Adicionar conta bancária"
+          icon={<WalletIcon />}
+          onClick={() => console.log("Adicionando conta...")}
+          clickOutsideToClose
+        >
+          <Form>
+            <Fieldset>
+              <Label htmlFor="banco">Banco</Label>
+              <CampoTexto
+                type="text"
+                id="banco"
+                placeholder="Ex: Anybank"
+                value={novaConta.banco}
+                onChange={(e) =>
+                  setNovaConta({ ...novaConta, banco: e.target.value })
+                }
+              />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="saldo">Saldo</Label>
+              <CampoTexto
+                type="number"
+                id="saldo"
+                placeholder="R$ 500,00"
+                value={novaConta.saldo}
+                onChange={(e) =>
+                  setNovaConta({
+                    ...novaConta,
+                    saldo: parseFloat(e.target.value),
+                  })
+                }
+              />
+            </Fieldset>
+          </Form>
+        </Modal>
       </Container>
     </Cartao>
   );
