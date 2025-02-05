@@ -1,0 +1,19 @@
+{
+  "transacoes": [
+    {
+      "id": 1,
+      "nome": "Compra de supermercado",
+      "valor": 150,
+      "tipo": "despesa",
+      "categoria": "Alimentação",
+      "data": "2024-10-10"
+    }
+  ],
+  "contas": [
+    {
+      "id": 1,
+      "nome": "Conta Corrente",
+      "saldo": 5000
+    }
+  ]
+}
