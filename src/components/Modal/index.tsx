@@ -1,78 +1,56 @@
-import React, { useEffect, useRef } from "react";
-import {
-  ButtonGroup,
-  CloseButton,
-  ModalContainer,
-  ModalHeader,
-  ModalOverlay,
-} from "./style";
+import React, {
+  forwardRef,
+  ReactNode,
+  useRef,
+} from "react";
+import { ButtonGroup, CloseButton, ModalContainer, ModalHeader } from "./style";
 import Botao from "../Botao";
 
 interface ModalProps {
   icon: React.ReactNode;
   titulo: string;
-  aoFechar: () => void;
-  children: React.ReactNode;
-  estaAberta: boolean;
-  aoClicar: () => void;
+  children: ReactNode;
+  onClick: () => void;
+  clickOutsideToClose?: boolean;
 }
 
-const Modal = ({
-  icon,
-  titulo,
-  aoFechar,
-  children,
-  estaAberta,
-  aoClicar,
-}: ModalProps) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+export interface ModalHandle {
+  open: () => void;
+  close: () => void;
+}
 
-  useEffect(() => {
-    const dialogNode = dialogRef.current;
+const Modal = forwardRef<ModalHandle, ModalProps>(
+  ({ icon, titulo, children, onClick, }, ref) => {
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
-    if (dialogNode) {
-      if (estaAberta) {
-        dialogNode.showModal();
-      } else {
-        dialogNode.close();
-      }
-    }
-
-    const handleClose = () => aoFechar();
-
-    if (dialogNode) {
-      dialogNode.addEventListener("close", handleClose);
-    }
-
-    return () => {
-      if (dialogNode) {
-        dialogNode.removeEventListener("close", handleClose);
-      }
-    };
-  }, [estaAberta, aoFechar]);
-
-  return (
-    <ModalOverlay>
+    return (
       <ModalContainer ref={dialogRef}>
         <ModalHeader>
           <div>
             {icon}
             {titulo}
           </div>
-          <CloseButton onClick={aoFechar}>x</CloseButton>
+          <CloseButton >x</CloseButton>
         </ModalHeader>
-        {children}
-        <ButtonGroup>
-          <Botao $variante="secundario" onClick={aoFechar}>
-            Cancelar
-          </Botao>
-          <Botao $variante="primario" onClick={aoClicar}>
-            Adicionar
-          </Botao>
-        </ButtonGroup>
+        <section>
+          {children}
+          <ButtonGroup>
+            <Botao $variante="secundario" >
+              Cancelar
+            </Botao>
+            <Botao
+              $variante="primario"
+              onClick={() => {
+                onClick();
+              }}
+            >
+              Adicionar
+            </Botao>
+          </ButtonGroup>
+        </section>
       </ModalContainer>
-    </ModalOverlay>
-  );
-};
+    );
+  }
+);
 
 export default Modal;
