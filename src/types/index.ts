@@ -5,7 +5,7 @@ export interface Usuario {
   objetivoFinanceiro: "economizar" | "investir" | "controlar-gastos" | null;
 }
 
-export interface Transacao {
+export interface ITransacao {
   id: number;
   nome: string;
   valor: number;
@@ -14,8 +14,8 @@ export interface Transacao {
   data: string;
 }
 
-export interface Conta {
+export interface IConta {
   id: number;
-  nome: string;
+  banco: string;
   saldo: number;
 }

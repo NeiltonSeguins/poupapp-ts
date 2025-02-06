@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Conta from "../Conta";
 import styled from "styled-components";
 import CampoTexto from "../CampoTexto";
@@ -9,6 +9,8 @@ import Form from "../Form";
 import Label from "../Label";
 import Fieldset from "../Fieldset";
 import WalletIcon from "../Icones/WalletIcon";
+import { IConta } from "../../types";
+import { getContas } from "../../api/contas";
 
 export const Container = styled(CartaoCorpo)`
   padding: var(--padding-l) var(--padding-m);
@@ -35,18 +37,24 @@ export const ListaMovimentacoes = styled.ul`
   -ms-overflow-style: none;
 `;
 
-const contas = [
-  { id: 1, banco: "Anybank", saldo: 1500 },
-  { id: 2, banco: "Bytebank", saldo: 2500 },
-  { id: 3, banco: "Swiftbank", saldo: 3200 },
-];
-
 const Contas = () => {
+  const [contas, setContas] = useState<IConta[]>([]);
+
   const [novaConta, setNovaConta] = useState({
     banco: "",
     saldo: 0,
   });
+
   const modalRef = useRef<ModalHandle>(null);
+  
+  const fetchUser = async () => {
+    const response = await getContas();
+    setContas(response);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <Cartao>

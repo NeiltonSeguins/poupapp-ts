@@ -15,16 +15,32 @@ import { RadioGroup, RadioInput } from "../../components/BotaoRadio";
 import Form from "../../components/Form";
 import ilustracao from "../../assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
+import { createUsuario } from "../../api/usuario.js";
+import { Usuario } from "../../types/index.js";
+
+type FormFields = "nome" | "renda" | "objetivoFinanceiro";
 
 const Cadastro = () => {
+  const [form, setForm] = useState<Omit<Usuario, "id">>({
+    nome: "",
+    renda: 0,
+    objetivoFinanceiro: null,
+  });
+
+  const handleChange = (campo: FormFields, valor: string) => {
+    setForm((prev) => ({ ...prev, [campo]: valor }));
+  };
+
   const navigate = useNavigate();
 
-  const [nome, setNome] = useState("");
-  const [renda, setRenda] = useState("");
-  const [objetivoFinanceiro, setObjetivoFinanceiro] = useState("");
-
-  const aoSubmeterFormulario = (evento: React.FormEvent) => {
+  const handleSubmit = async (evento: React.FormEvent) => {
     evento.preventDefault();
+    try {
+      const novoUsuario = await createUsuario(form);
+      console.log("Usuário criado:", novoUsuario);
+    } catch (error) {
+      console.error("Erro ao criar usuário:", error);
+    }
     navigate("/home");
   };
 
@@ -44,8 +60,10 @@ const Cadastro = () => {
               <CampoTexto
                 type="text"
                 name="nome"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
+                value={form.nome}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleChange("nome", e.target.value)
+                }
               />
             </Fieldset>
             <Fieldset>
@@ -53,8 +71,10 @@ const Cadastro = () => {
               <CampoTexto
                 type="text"
                 name="renda"
-                value={renda}
-                onChange={(e) => setRenda(e.target.value)}
+                value={form.renda}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleChange("renda", e.target.value)
+                }
               />
             </Fieldset>
             <Fieldset>
@@ -63,40 +83,46 @@ const Cadastro = () => {
                 <RadioInput>
                   <input
                     type="radio"
-                    name="objetivo"
+                    name="objetivoFinanceiro"
                     id="economizar"
                     value="economizar"
-                    checked={objetivoFinanceiro === "economizar"}
-                    onChange={(e) => setObjetivoFinanceiro(e.target.value)}
+                    checked={form.objetivoFinanceiro === "economizar"}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleChange("objetivoFinanceiro", e.target.value)
+                    }
                   />
                   <Label htmlFor="economizar">Economizar</Label>
                 </RadioInput>
                 <RadioInput>
                   <input
                     type="radio"
-                    name="objetivo"
+                    name="objetivoFinanceiro"
                     id="investir"
                     value="investir"
-                    checked={objetivoFinanceiro === "investir"}
-                    onChange={(e) => setObjetivoFinanceiro(e.target.value)}
+                    checked={form.objetivoFinanceiro === "investir"}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleChange("objetivoFinanceiro", e.target.value)
+                    }
                   />
                   <Label htmlFor="investir">Investir</Label>
                 </RadioInput>
                 <RadioInput>
                   <input
                     type="radio"
-                    name="objetivo"
+                    name="objetivoFinanceiro"
                     id="controle-gastos"
                     value="controlar-gastos"
-                    checked={objetivoFinanceiro === "controlar-gastos"}
-                    onChange={(e) => setObjetivoFinanceiro(e.target.value)}
+                    checked={form.objetivoFinanceiro === "controlar-gastos"}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleChange("objetivoFinanceiro", e.target.value)
+                    }
                   />
                   <Label htmlFor="controle-gastos">Controlar gastos</Label>
                 </RadioInput>
               </RadioGroup>
             </Fieldset>
           </Form>
-          <Botao $variante="primario" onClick={aoSubmeterFormulario}>
+          <Botao $variante="primario" onClick={handleSubmit}>
             Ir para o app
           </Botao>
         </Container>

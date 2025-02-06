@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Usuario } from "../../types";
+import { getUsuarios } from "../../api/usuario";
 
-export const Usuario = styled.div`
+export const StyledUsuario = styled.div`
   grid-area: usuario;
   color: var(--cor-neutra-light);
 
@@ -14,11 +17,22 @@ export const Usuario = styled.div`
 `;
 
 const SaudacaoUsuario = () => {
+  const [user, setUser] = useState<Usuario | null>(null);
+
+  const fetchUser = async () => {
+    const response = await getUsuarios();
+    setUser(response[0]);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
-    <Usuario>
-      <h1>Olá, Alguém</h1>
+    <StyledUsuario>
+      <h1>Olá, {user?.nome}</h1>
       <p>Veja como estão suas finanças hoje.</p>
-    </Usuario>
+    </StyledUsuario>
   );
 };
 

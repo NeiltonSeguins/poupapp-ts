@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MoneyIcon from "../Icones/MoneyIcon";
 import { Container, ListaMovimentacoes } from "../Contas";
 import Transacao from "../Transacao";
@@ -10,36 +10,12 @@ import Fieldset from "../Fieldset";
 import Label from "../Label";
 import CampoTexto from "../CampoTexto";
 import { SelectGroup, SelectOption } from "../Select";
-
-const transacoes = [
-  {
-    id: 1,
-    nome: "Compra de supermercado",
-    valor: 150,
-    tipo: "despesa",
-    categoria: "Alimentação",
-    data: "2024-10-10",
-  },
-  {
-    id: 2,
-    nome: "Pagamento de aluguel",
-    valor: 1000,
-    tipo: "despesa",
-    categoria: "Moradia",
-    data: "2024-10-05",
-  },
-  {
-    id: 3,
-    nome: "Recebimento de salário",
-    valor: 3000,
-    tipo: "receita",
-    categoria: "Renda",
-    data: "2024-10-01",
-  },
-];
+import { ITransacao } from "../../types";
+import { getTransacoes } from "../../api/transacoes";
 
 const Transacoes = () => {
   const modalRef = useRef<ModalHandle>(null);
+
   const [novaTransacao, setNovaTransacao] = useState({
     nome: "",
     valor: 0,
@@ -47,6 +23,17 @@ const Transacoes = () => {
     categoria: "",
     data: "",
   });
+
+  const [transacoes, setTransacoes] = useState<ITransacao[]>([]);
+
+  const fetchUser = async () => {
+    const response = await getTransacoes();
+    setTransacoes(response);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <Cartao>
