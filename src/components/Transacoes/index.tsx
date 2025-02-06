@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import MoneyIcon from "../Icones/MoneyIcon";
 import { Container, ListaMovimentacoes } from "../Contas";
 import Transacao from "../Transacao";
@@ -10,11 +10,12 @@ import Fieldset from "../Fieldset";
 import Label from "../Label";
 import CampoTexto from "../CampoTexto";
 import { SelectGroup, SelectOption } from "../Select";
-import { ITransacao } from "../../types";
-import { getTransacoes } from "../../api/transacoes";
+import { useTransacoes } from "../../context/TransacoesContext";
 
 const Transacoes = () => {
   const modalRef = useRef<ModalHandle>(null);
+
+  const { transacoes } = useTransacoes();
 
   const [novaTransacao, setNovaTransacao] = useState({
     nome: "",
@@ -23,17 +24,6 @@ const Transacoes = () => {
     categoria: "",
     data: "",
   });
-
-  const [transacoes, setTransacoes] = useState<ITransacao[]>([]);
-
-  const fetchUser = async () => {
-    const response = await getTransacoes();
-    setTransacoes(response);
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
 
   return (
     <Cartao>

@@ -5,6 +5,7 @@ import Home from "./screens/Home";
 import Cadastro from "./screens/Cadastro";
 import GlobalStyle from "./GlobalStyle";
 import { UsuarioProvider } from "./context/UsuarioContext";
+import { TransacaoProvider } from "./context/TransacoesContext";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <GlobalStyle />
     <UsuarioProvider>
-      <RouterProvider router={router} />
+      <TransacaoProvider>
+        <RouterProvider router={router} />
+      </TransacaoProvider>
     </UsuarioProvider>
   </StrictMode>
 );
