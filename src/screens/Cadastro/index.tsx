@@ -15,12 +15,13 @@ import { RadioGroup, RadioInput } from "../../components/BotaoRadio";
 import Form from "../../components/Form";
 import ilustracao from "../../assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
-import { createUsuario } from "../../api/usuario.js";
 import { Usuario } from "../../types/index.js";
+import { useUsuario } from "../../context/UsuarioContext.js";
 
 type FormFields = "nome" | "renda" | "objetivoFinanceiro";
 
 const Cadastro = () => {
+  const { criarUsuario } = useUsuario();
   const [form, setForm] = useState<Omit<Usuario, "id">>({
     nome: "",
     renda: 0,
@@ -35,12 +36,7 @@ const Cadastro = () => {
 
   const handleSubmit = async (evento: React.FormEvent) => {
     evento.preventDefault();
-    try {
-      const novoUsuario = await createUsuario(form);
-      console.log("Usuário criado:", novoUsuario);
-    } catch (error) {
-      console.error("Erro ao criar usuário:", error);
-    }
+    criarUsuario(form);
     navigate("/home");
   };
 
