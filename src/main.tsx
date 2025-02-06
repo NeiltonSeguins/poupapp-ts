@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./screens/Home";
 import Cadastro from "./screens/Cadastro";
 import GlobalStyle from "./GlobalStyle";
+import { UsuarioProvider } from "./context/UsuarioContext";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <GlobalStyle />
-    <RouterProvider router={router} />
+    <UsuarioProvider>
+      <RouterProvider router={router} />
+    </UsuarioProvider>
   </StrictMode>
 );
