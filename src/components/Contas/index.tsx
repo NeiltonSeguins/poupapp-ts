@@ -10,6 +10,7 @@ import Label from "../Label";
 import Fieldset from "../Fieldset";
 import WalletIcon from "../Icones/WalletIcon";
 import { useContas } from "../../context/ContasContext";
+import { IConta } from "../../types";
 
 export const Container = styled(CartaoCorpo)`
   padding: var(--padding-l) var(--padding-m);
@@ -37,14 +38,29 @@ export const ListaMovimentacoes = styled.ul`
 `;
 
 const Contas = () => {
-  const { contas } = useContas();
+  const modalRef = useRef<ModalHandle>(null);
+  const { contas, criarConta } = useContas();
 
-  const [novaConta, setNovaConta] = useState({
+  const [novaConta, setNovaConta] = useState<Omit<IConta, "id">>({
     banco: "",
     saldo: 0,
   });
 
-  const modalRef = useRef<ModalHandle>(null);
+  const handleChange = (
+    campo: keyof typeof novaConta,
+    valor: string | number
+  ) => {
+    setNovaConta((prev) => ({ ...prev, [campo]: valor }));
+  };
+
+  const handleCreateConta = async () => {
+    try {
+      await criarConta(novaConta);
+      setNovaConta({ banco: "", saldo: 0 });
+    } catch (error) {
+      console.error("Erro ao criar conta:", error);
+    }
+  };
 
   return (
     <Cartao>
@@ -63,7 +79,7 @@ const Contas = () => {
           ref={modalRef}
           titulo="Adicionar conta bancária"
           icon={<WalletIcon />}
-          onClick={() => console.log("Adicionando conta...")}
+          onClick={handleCreateConta}
           clickOutsideToClose
         >
           <Form>
@@ -74,9 +90,7 @@ const Contas = () => {
                 id="banco"
                 placeholder="Ex: Anybank"
                 value={novaConta.banco}
-                onChange={(e) =>
-                  setNovaConta({ ...novaConta, banco: e.target.value })
-                }
+                onChange={(e) => handleChange("banco", e.target.value)}
               />
             </Fieldset>
             <Fieldset>
@@ -87,10 +101,7 @@ const Contas = () => {
                 placeholder="R$ 500,00"
                 value={novaConta.saldo}
                 onChange={(e) =>
-                  setNovaConta({
-                    ...novaConta,
-                    saldo: parseFloat(e.target.value),
-                  })
+                  handleChange("saldo", parseFloat(e.target.value))
                 }
               />
             </Fieldset>
