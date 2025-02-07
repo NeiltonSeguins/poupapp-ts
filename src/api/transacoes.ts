@@ -1,14 +1,14 @@
 import { api } from "./index";
-import { Transacao } from "../types";
+import { ITransacao } from "../types";
 
-export const getTransacoes = async (): Promise<Transacao[]> => {
-  const { data } = await api.get<Transacao[]>("/transacoes");
+export const getTransacoes = async (): Promise<ITransacao[]> => {
+  const { data } = await api.get<ITransacao[]>("/transacoes");
   return data;
 };
 
 export const createTransacao = async (
-  transacao: Omit<Transacao, "id">
-): Promise<Transacao> => {
-  const { data } = await api.post<Transacao>("/transacoes", transacao);
+  transacao: Omit<ITransacao, "id">
+): Promise<ITransacao> => {
+  const { data } = await api.post<ITransacao>("/transacoes", transacao);
   return data;
 };

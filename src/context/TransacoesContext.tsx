@@ -7,11 +7,12 @@ import {
   useContext,
 } from "react";
 import { ITransacao } from "../types";
-import { getTransacoes } from "../api/transacoes";
+import { createTransacao, getTransacoes } from "../api/transacoes";
 
 interface TransacaoContextType {
   transacoes: ITransacao[];
   setTransacoes?: (transacoes: ITransacao[]) => void;
+  criarTransacao: (novaTransacao: Omit<ITransacao, "id">) => Promise<void>;
 }
 
 export const TransacaoContext = createContext<TransacaoContextType | undefined>(
@@ -32,8 +33,17 @@ export const TransacaoProvider = ({ children }: { children: ReactNode }) => {
     })();
   }, []);
 
+  const criarTransacao = async (novaTransacao: Omit<ITransacao, "id">) => {
+    try {
+      const transacaoCriada = await createTransacao(novaTransacao);
+      setTransacoes((prev) => [...prev, transacaoCriada]);
+    } catch (error) {
+      console.error("Erro ao criar transação", error);
+    }
+  };
+
   return (
-    <TransacaoContext.Provider value={{ transacoes }}>
+    <TransacaoContext.Provider value={{ transacoes, criarTransacao }}>
       {children}
     </TransacaoContext.Provider>
   );
