@@ -1,12 +1,12 @@
 import { api } from "./index";
-import { Conta } from "../types";
+import { IConta } from "../types";
 
-export const getContas = async (): Promise<Conta[]> => {
-  const { data } = await api.get<Conta[]>("/contas");
+export const getContas = async (): Promise<IConta[]> => {
+  const { data } = await api.get<IConta[]>("/contas");
   return data;
 };
 
-export const createConta = async (conta: Omit<Conta, "id">): Promise<Conta> => {
-  const { data } = await api.post<Conta>("/contas", conta);
+export const createConta = async (conta: Omit<IConta, "id">): Promise<IConta> => {
+  const { data } = await api.post<IConta>("/contas", conta);
   return data;
 };

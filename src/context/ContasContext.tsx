@@ -7,11 +7,12 @@ import {
   useContext,
 } from "react";
 import { IConta } from "../types";
-import { getContas } from "../api/contas";
+import { createConta, getContas } from "../api/contas";
 
 interface ContaContextType {
   contas: IConta[];
   setContas?: (contas: IConta[]) => void;
+  criarConta: (novaConta: Omit<IConta, "id">) => Promise<void>;
 }
 
 export const ContaContext = createContext<ContaContextType | undefined>(
@@ -32,8 +33,19 @@ export const ContaProvider = ({ children }: { children: ReactNode }) => {
     })();
   }, []);
 
+  const criarConta = async (novaConta: Omit<IConta, "id">) => {
+    try {
+      const contaCriada = await createConta(novaConta);
+      setContas((prev) => [...prev, contaCriada]);
+    } catch (error) {
+      console.error("Erro ao criar conta", error);
+    }
+  };
+
   return (
-    <ContaContext.Provider value={{ contas }}>{children}</ContaContext.Provider>
+    <ContaContext.Provider value={{ contas, criarConta }}>
+      {children}
+    </ContaContext.Provider>
   );
 };
 
