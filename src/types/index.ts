@@ -9,7 +9,7 @@ export interface ITransacao {
   id: number;
   nome: string;
   valor: number;
-  tipo: "despesa" | "receita";
+  tipo: "despesa" | "receita" | "";
   categoria: string;
   data: string;
 }
