@@ -1,61 +1,43 @@
 {
   "usuarios": [
     {
-      "id": "f590",
-      "nome": "Neilton ",
-      "renda": "2000",
+      "id": "dc4b",
+      "nome": "Neilton Seguins",
+      "renda": 5640,
       "objetivoFinanceiro": "investir"
     }
   ],
   "transacoes": [
     {
-      "id": "1",
-      "nome": "Compra de supermercado",
-      "valor": 150,
-      "tipo": "despesa",
-      "categoria": "Alimentação",
-      "data": "2024-10-10"
-    },
-    {
-      "id": "37a0",
+      "id": "1125",
       "nome": "Pix",
-      "valor": 50,
+      "valor": 100,
       "tipo": "receita",
       "categoria": "Pagamentos",
-      "data": "2025-02-12"
+      "data": "2025-02-05"
     },
     {
-      "id": "a1ce",
+      "id": "3fcd",
       "nome": "Raquete de tênis",
-      "valor": 50,
+      "valor": 78,
       "tipo": "despesa",
       "categoria": "Esportes",
-      "data": "2025-02-13"
+      "data": "2025-02-05"
     },
     {
-      "id": "1871",
-      "nome": "Pirulito",
-      "valor": 5,
+      "id": "cf3c",
+      "nome": "Fifa 25",
+      "valor": 100,
       "tipo": "despesa",
-      "categoria": "Doces",
-      "data": "2025-02-10"
+      "categoria": "Video Games",
+      "data": "2025-01-26"
     }
   ],
   "contas": [
     {
-      "id": "1",
-      "banco": "Anibank",
-      "saldo": 5000
-    },
-    {
-      "id": "dd4a",
+      "id": "5afe",
       "banco": "Bytebank",
-      "saldo": 200
-    },
-    {
-      "id": "115b",
-      "banco": "Anybank",
-      "saldo": 2000
+      "saldo": 100
     }
   ]
 }

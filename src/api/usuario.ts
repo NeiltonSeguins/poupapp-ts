@@ -12,3 +12,8 @@ export const createUsuario = async (
   const { data } = await api.post<Usuario>("/usuarios", usuario);
   return data;
 };
+
+export const updateUsuario = async (id: number, dados: Partial<Usuario>): Promise<Usuario> => {
+  const { data } = await api.patch<Usuario>(`/usuarios/${id}`, dados);
+  return data;
+};

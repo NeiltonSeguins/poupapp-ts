@@ -9,7 +9,7 @@ import {
   useCallback,
 } from "react";
 import { ITransacao, Usuario } from "../types";
-import { getUsuarios, createUsuario } from "../api/usuario";
+import { getUsuarios, createUsuario, updateUsuario } from "../api/usuario";
 
 const DIAS_DO_MES = 30;
 
@@ -79,15 +79,36 @@ export const UsuarioProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const atualizaOrcamentoDiario = (transacao: ITransacao) => {
+  const atualizaOrcamentoDiario = async (transacao: ITransacao) => {
     setOrcamentoDiario((prev) => {
       const valor = Math.abs(transacao.valor);
       return transacao.tipo !== "receita" ? prev - valor : prev + valor;
     });
+
+    if (!usuario) return;
+
+    try {
+      const novoOrcamento =
+        orcamentoDiario -
+        (transacao.tipo !== "receita" ? transacao.valor : -transacao.valor);
+      await updateUsuario(usuario.id, {
+        renda: novoOrcamento * DIAS_DO_MES,
+      });
+    } catch (error) {
+      console.error("Erro ao atualizar orçamento na API", error);
+    }
   };
 
-  const atualizaOrcamentoComSaldo = (saldo: number) => {
+  const atualizaOrcamentoComSaldo = async (saldo: number) => {
     setOrcamentoDiario((prev) => prev + saldo);
+    if (!usuario) return;
+
+    try {
+      const novoOrcamento = orcamentoDiario + saldo;
+      await updateUsuario(usuario.id, { renda: novoOrcamento * DIAS_DO_MES });
+    } catch (error) {
+      console.error("Erro ao atualizar orçamento na API", error);
+    }
   };
 
   const objetivoFinanceiroAtual =
