@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Cartao, CartaoCabecalho, Descricao, CartaoCorpo } from "../Cartao";
 import PigIcon from "../Icones/PigIcon.tsx";
 import BarraProgresso from "./BarraProgresso.tsx";
+import { useUsuario } from "../../context/UsuarioContext.tsx";
 
 export const TituloMetaFinanceira = styled.p`
   display: flex;
@@ -14,6 +15,7 @@ export const TituloMetaFinanceira = styled.p`
 `;
 
 const MetaFinanceira = () => {
+  const { objetivoFinanceiroAtual } = useUsuario();
   return (
     <Cartao>
       <CartaoCabecalho>Progresso da meta financeira</CartaoCabecalho>
@@ -21,7 +23,7 @@ const MetaFinanceira = () => {
         <Descricao>
           <TituloMetaFinanceira>
             <PigIcon />
-            Economizar
+            {objetivoFinanceiroAtual}
           </TituloMetaFinanceira>
           <BarraProgresso />
         </Descricao>

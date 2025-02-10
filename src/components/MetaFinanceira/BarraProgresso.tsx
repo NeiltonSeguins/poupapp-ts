@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useUsuario } from "../../context/UsuarioContext";
 
 export const BarraContainer = styled.div`
   background-color: var(--cor-neutra-dark);
@@ -35,10 +36,11 @@ export const TextoProgresso = styled.div`
 `;
 
 const BarraProgresso = () => {
+  const { progressoMeta } = useUsuario();
   return (
     <BarraContainer>
-      <StyledBarraProgresso $progresso={90} />
-      <TextoProgresso>{90}%</TextoProgresso>
+      <StyledBarraProgresso $progresso={progressoMeta} />
+      <TextoProgresso>{progressoMeta}%</TextoProgresso>
     </BarraContainer>
   );
 };
