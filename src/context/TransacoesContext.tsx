@@ -8,6 +8,7 @@ import {
 } from "react";
 import { ITransacao } from "../types";
 import { createTransacao, getTransacoes } from "../api/transacoes";
+import { useUsuario } from "./UsuarioContext";
 
 interface TransacaoContextType {
   transacoes: ITransacao[];
@@ -21,6 +22,7 @@ export const TransacaoContext = createContext<TransacaoContextType | undefined>(
 
 export const TransacaoProvider = ({ children }: { children: ReactNode }) => {
   const [transacoes, setTransacoes] = useState<ITransacao[]>([]);
+  const { atualizaOrcamentoDiario } = useUsuario();
 
   useEffect(() => {
     (async () => {
@@ -36,6 +38,7 @@ export const TransacaoProvider = ({ children }: { children: ReactNode }) => {
   const criarTransacao = async (novaTransacao: Omit<ITransacao, "id">) => {
     try {
       const transacaoCriada = await createTransacao(novaTransacao);
+      atualizaOrcamentoDiario({ ...novaTransacao, id: transacaoCriada.id });
       setTransacoes((prev) => [...prev, transacaoCriada]);
     } catch (error) {
       console.error("Erro ao criar transação", error);

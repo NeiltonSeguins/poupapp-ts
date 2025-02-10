@@ -8,6 +8,7 @@ import {
 } from "react";
 import { IConta } from "../types";
 import { createConta, getContas } from "../api/contas";
+import { useUsuario } from "./UsuarioContext";
 
 interface ContaContextType {
   contas: IConta[];
@@ -21,6 +22,7 @@ export const ContaContext = createContext<ContaContextType | undefined>(
 
 export const ContaProvider = ({ children }: { children: ReactNode }) => {
   const [contas, setContas] = useState<IConta[]>([]);
+  const { atualizaOrcamentoComSaldo } = useUsuario();
 
   useEffect(() => {
     (async () => {
@@ -36,6 +38,7 @@ export const ContaProvider = ({ children }: { children: ReactNode }) => {
   const criarConta = async (novaConta: Omit<IConta, "id">) => {
     try {
       const contaCriada = await createConta(novaConta);
+      atualizaOrcamentoComSaldo(novaConta.saldo);
       setContas((prev) => [...prev, contaCriada]);
     } catch (error) {
       console.error("Erro ao criar conta", error);
