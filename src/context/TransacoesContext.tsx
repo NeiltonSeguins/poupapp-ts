@@ -12,6 +12,7 @@ import { useUsuario } from "./UsuarioContext";
 
 interface TransacaoContextType {
   transacoes: ITransacao[];
+  calcularGastosPorCategoria: () => Record<string, number>;
   setTransacoes?: (transacoes: ITransacao[]) => void;
   criarTransacao: (novaTransacao: Omit<ITransacao, "id">) => Promise<void>;
 }
@@ -45,8 +46,20 @@ export const TransacaoProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const calcularGastosPorCategoria = () => {
+    return transacoes
+      .filter((transacao) => transacao.tipo === "despesa")
+      .reduce<Record<string, number>>((acc, transacao) => {
+        acc[transacao.categoria] =
+          (acc[transacao.categoria] || 0) + transacao.valor;
+        return acc;
+      }, {});
+  };
+
   return (
-    <TransacaoContext.Provider value={{ transacoes, criarTransacao }}>
+    <TransacaoContext.Provider
+      value={{ transacoes, criarTransacao, calcularGastosPorCategoria }}
+    >
       {children}
     </TransacaoContext.Provider>
   );

@@ -23,6 +23,22 @@
       "tipo": "receita",
       "categoria": "Pagamentos",
       "data": "2025-02-12"
+    },
+    {
+      "id": "a1ce",
+      "nome": "Raquete de tênis",
+      "valor": 50,
+      "tipo": "despesa",
+      "categoria": "Esportes",
+      "data": "2025-02-13"
+    },
+    {
+      "id": "1871",
+      "nome": "Pirulito",
+      "valor": 5,
+      "tipo": "despesa",
+      "categoria": "Doces",
+      "data": "2025-02-10"
     }
   ],
   "contas": [
