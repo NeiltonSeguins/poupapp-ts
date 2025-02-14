@@ -2,11 +2,14 @@ import BarraLateral from "../../components/BarraLateral";
 import BarraPesquisa from "../../components/BarraPesquisa";
 import SaudacaoUsuario from "../../components/SaudacaoUsuario";
 import OrcamentoDiario from "../../components/OrcamentoDiario";
-import MetaFinanceira from "../../components/MetaFinanceira";
 import Transacoes from "../../components/Transacoes";
-import Contas from "../../components/Contas";
 import BalancoFinanceiro from "../../components/BalancoFinanceiro";
-import { Container, Movimentacoes, Orcamento } from "./style";
+import {
+  Container,
+  Movimentacoes,
+  Orcamento,
+  TransacoesWrapper,
+} from "./style";
 
 function Home() {
   return (
@@ -16,13 +19,13 @@ function Home() {
       <SaudacaoUsuario />
       <Orcamento>
         <OrcamentoDiario />
-        <MetaFinanceira />
       </Orcamento>
       <Movimentacoes>
-        <Transacoes />
-        <Contas />
+        <BalancoFinanceiro />
       </Movimentacoes>
-      <BalancoFinanceiro />
+      <TransacoesWrapper>
+        <Transacoes />
+      </TransacoesWrapper>
     </Container>
   );
 }

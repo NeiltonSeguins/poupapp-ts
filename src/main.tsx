@@ -6,7 +6,6 @@ import Cadastro from "./screens/Cadastro";
 import GlobalStyle from "./GlobalStyle";
 import { UsuarioProvider } from "./context/UsuarioContext";
 import { TransacaoProvider } from "./context/TransacoesContext";
-import { ContaProvider } from "./context/ContasContext";
 
 const router = createBrowserRouter([
   {
@@ -24,9 +23,7 @@ createRoot(document.getElementById("root")!).render(
     <GlobalStyle />
     <UsuarioProvider>
       <TransacaoProvider>
-        <ContaProvider>
-          <RouterProvider router={router} />
-        </ContaProvider>
+        <RouterProvider router={router} />
       </TransacaoProvider>
     </UsuarioProvider>
   </StrictMode>

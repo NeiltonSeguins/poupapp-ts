@@ -2,17 +2,17 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 280px 1fr;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: 280px 1fr 320px;
+  grid-template-rows: auto auto auto 1fr;
   gap: var(--gap-s);
   min-width: 1260px;
   box-sizing: border-box;
+  height: 100vh;
   grid-template-areas:
-    "sidebar search"
-    "sidebar usuario"
-    "sidebar orcamento"
-    "sidebar movimentacoes"
-    "sidebar chart";
+    "sidebar search search"
+    "sidebar usuario usuario"
+    "sidebar orcamento transacoes"
+    "sidebar movimentacoes transacoes";
 `;
 
 export const Orcamento = styled.section`
@@ -25,5 +25,12 @@ export const Orcamento = styled.section`
 export const Movimentacoes = styled.section`
   grid-area: movimentacoes;
   display: flex;
+  gap: var(--gap-l);
+`;
+
+export const TransacoesWrapper = styled.section`
+  grid-area: transacoes;
+  display: flex;
+  flex-direction: column;
   gap: var(--gap-l);
 `;

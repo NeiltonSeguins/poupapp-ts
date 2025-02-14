@@ -2,7 +2,6 @@ export interface Usuario {
   id: number;
   nome: string;
   renda: number;
-  objetivoFinanceiro: "economizar" | "investir" | "controlar-gastos" | null;
 }
 
 export interface ITransacao {

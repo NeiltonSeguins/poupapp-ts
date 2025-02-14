@@ -5,8 +5,6 @@ import { useTransacoes } from "../../context/TransacoesContext";
 
 export const AreaChart = styled.div`
   padding: var(--padding-xs);
-  width: 100%;
-  height: 100%;
 `;
 
 const BalancoFinanceiro = () => {

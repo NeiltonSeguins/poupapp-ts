@@ -23,7 +23,7 @@ export const CartaoCorpo = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0;
-  min-height: 100px;
+  min-height: 150px;
 `;
 
 export const Descricao = styled.div`

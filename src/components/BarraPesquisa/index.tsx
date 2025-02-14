@@ -3,11 +3,11 @@ import SearchIcon from "../Icones/SearchIcon";
 import styled from "styled-components";
 
 export const StyledLabel = styled.label`
-  margin-top: 32px;
+  grid-area: search;
+  margin-top: 64px;
   background-color: var(--cor-neutra-dark-medium);
   border-radius: var(--border-radius-s);
   padding: var(--padding-xs) var(--padding-s);
-  grid-area: search;
   display: flex;
   justify-content: center;
   align-items: center;

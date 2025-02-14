@@ -11,7 +11,6 @@ import CampoTexto from "../../components/CampoTexto";
 import Botao from "../../components/Botao";
 import Label from "../../components/Label";
 import Fieldset from "../../components/Fieldset";
-import { RadioGroup, RadioInput } from "../../components/BotaoRadio";
 import Form from "../../components/Form";
 import ilustracao from "../../assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +24,6 @@ const Cadastro = () => {
   const [form, setForm] = useState<Omit<Usuario, "id">>({
     nome: "",
     renda: 0,
-    objetivoFinanceiro: null,
   });
 
   const handleChange = (campo: FormFields, valor: string) => {
@@ -72,50 +70,6 @@ const Cadastro = () => {
                   handleChange("renda", e.target.value)
                 }
               />
-            </Fieldset>
-            <Fieldset>
-              <Label>Selecione seu objetivo financeiro:</Label>
-              <RadioGroup>
-                <RadioInput>
-                  <input
-                    type="radio"
-                    name="objetivoFinanceiro"
-                    id="economizar"
-                    value="economizar"
-                    checked={form.objetivoFinanceiro === "economizar"}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange("objetivoFinanceiro", e.target.value)
-                    }
-                  />
-                  <Label htmlFor="economizar">Economizar</Label>
-                </RadioInput>
-                <RadioInput>
-                  <input
-                    type="radio"
-                    name="objetivoFinanceiro"
-                    id="investir"
-                    value="investir"
-                    checked={form.objetivoFinanceiro === "investir"}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange("objetivoFinanceiro", e.target.value)
-                    }
-                  />
-                  <Label htmlFor="investir">Investir</Label>
-                </RadioInput>
-                <RadioInput>
-                  <input
-                    type="radio"
-                    name="objetivoFinanceiro"
-                    id="controle-gastos"
-                    value="controlar-gastos"
-                    checked={form.objetivoFinanceiro === "controlar-gastos"}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange("objetivoFinanceiro", e.target.value)
-                    }
-                  />
-                  <Label htmlFor="controle-gastos">Controlar gastos</Label>
-                </RadioInput>
-              </RadioGroup>
             </Fieldset>
           </Form>
           <Botao $variante="primario" onClick={handleSubmit}>

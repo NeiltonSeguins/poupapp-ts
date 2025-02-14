@@ -13,7 +13,6 @@ import { useUsuario } from "./UsuarioContext";
 interface TransacaoContextType {
   transacoes: ITransacao[];
   calcularGastosPorCategoria: () => Record<string, number>;
-  setTransacoes?: (transacoes: ITransacao[]) => void;
   criarTransacao: (novaTransacao: Omit<ITransacao, "id">) => Promise<void>;
 }
 

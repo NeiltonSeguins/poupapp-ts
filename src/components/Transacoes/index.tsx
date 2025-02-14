@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
 import MoneyIcon from "../Icones/MoneyIcon";
-import { Container, ListaMovimentacoes } from "../Contas";
 import Transacao from "../Transacao";
-import { Cartao, CartaoCabecalho } from "../Cartao";
+import { Cartao, CartaoCabecalho, CartaoCorpo } from "../Cartao";
 import Botao from "../Botao";
 import Modal, { ModalHandle } from "../Modal";
 import { Form } from "react-router-dom";
@@ -12,6 +11,33 @@ import CampoTexto from "../CampoTexto";
 import { SelectGroup, SelectOption } from "../Select";
 import { useTransacoes } from "../../context/TransacoesContext";
 import { ITransacao } from "../../types";
+import styled from "styled-components";
+
+export const Container = styled(CartaoCorpo)`
+  padding: var(--padding-l) var(--padding-m);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 72%;
+`;
+
+export const ListaMovimentacoes = styled.ul`
+  list-style: none;
+  color: var(--cor-primaria);
+  margin: 0;
+  padding-left: 0px;
+  padding-bottom: var(--padding-m);
+  width: 100%;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+`;
 
 const Transacoes = () => {
   const modalRef = useRef<ModalHandle>(null);
