@@ -28,6 +28,7 @@ export const TituloTransacao = styled.div<TituloTransacaoProps>`
 
   & > h3 {
     margin: 0;
+    text-align: start;
   }
 `;
 

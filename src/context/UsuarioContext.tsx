@@ -28,6 +28,7 @@ export const UsuarioProvider = ({ children }: { children: ReactNode }) => {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [orcamentoDiario, setOrcamentoDiario] = useState<number>(0);
 
+   // Morre e vira uma prop do usuário
   const calculaOrcamentoDiario = (renda?: number) => {
     if (!usuario && renda === undefined) return;
     setOrcamentoDiario(Math.floor((renda ?? usuario!.renda) / DIAS_DO_MES));
@@ -38,7 +39,7 @@ export const UsuarioProvider = ({ children }: { children: ReactNode }) => {
       try {
         const user = await getUsuarios();
         setUsuario(user[0]);
-        calculaOrcamentoDiario(user[0].renda);
+        calculaOrcamentoDiario(user[0].renda); // Some daqui
       } catch (error) {
         console.error("Erro ao buscar usuário", error);
       }
@@ -48,12 +49,14 @@ export const UsuarioProvider = ({ children }: { children: ReactNode }) => {
   const criarUsuario = async (dados: Omit<Usuario, "id">) => {
     try {
       const novoUsuario = await createUsuario(dados);
+      // Função calcula orcamento diário
       setUsuario(novoUsuario);
     } catch (error) {
       console.error("Erro ao criar usuário", error);
     }
   };
 
+  // Usar um reduce para calcular aqui
   const atualizaOrcamentoDiario = async (transacao: ITransacao) => {
     setOrcamentoDiario((prev) => {
       const valor = Math.abs(transacao.valor);

@@ -6,8 +6,8 @@ export const Container = styled.div`
   grid-template-rows: auto auto auto 1fr;
   gap: var(--gap-s);
   min-width: 1260px;
+  margin: 32px 0;
   box-sizing: border-box;
-  height: 100vh;
   grid-template-areas:
     "sidebar search search"
     "sidebar usuario usuario"

@@ -26,9 +26,9 @@ const GlobalStyle = createGlobalStyle`
   --border-radius-l: 1.5rem;
 
   --padding-xs: 0.5rem;
-  --padding-s: 1rem;
-  --padding-m: 1.5rem;
-  --padding-l: 2.5rem;
+  --padding-s: 0.75rem;
+  --padding-m: 1.25rem;
+  --padding-l: 1.5rem;
   --padding-xl: 5rem;
 
   --gap-xs: 0.5rem;

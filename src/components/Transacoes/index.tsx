@@ -19,7 +19,7 @@ export const Container = styled(CartaoCorpo)`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  height: 72%;
+  height: 535px;
 `;
 
 export const ListaMovimentacoes = styled.ul`

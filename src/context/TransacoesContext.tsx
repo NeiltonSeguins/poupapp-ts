@@ -22,6 +22,7 @@ export const TransacaoContext = createContext<TransacaoContextType | undefined>(
 
 export const TransacaoProvider = ({ children }: { children: ReactNode }) => {
   const [transacoes, setTransacoes] = useState<ITransacao[]>([]);
+  // Evitar dependencia cruzada
   const { atualizaOrcamentoDiario } = useUsuario();
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export const TransacaoProvider = ({ children }: { children: ReactNode }) => {
   const criarTransacao = async (novaTransacao: Omit<ITransacao, "id">) => {
     try {
       const transacaoCriada = await createTransacao(novaTransacao);
+      // Some daqui
       atualizaOrcamentoDiario({ ...novaTransacao, id: transacaoCriada.id });
       setTransacoes((prev) => [...prev, transacaoCriada]);
     } catch (error) {

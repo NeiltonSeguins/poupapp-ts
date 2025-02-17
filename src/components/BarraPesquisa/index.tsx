@@ -2,9 +2,9 @@ import CampoTexto from "../CampoTexto";
 import SearchIcon from "../Icones/SearchIcon";
 import styled from "styled-components";
 
-export const StyledLabel = styled.label`
+export const StyledForm = styled.form`
   grid-area: search;
-  margin-top: 64px;
+  margin-top: 16px;
   background-color: var(--cor-neutra-dark-medium);
   border-radius: var(--border-radius-s);
   padding: var(--padding-xs) var(--padding-s);
@@ -16,14 +16,14 @@ export const StyledLabel = styled.label`
 
 const BarraPesquisa = () => {
   return (
-    <StyledLabel htmlFor="search">
+    <StyledForm>
       <SearchIcon />
       <CampoTexto
         name="search"
         type="text"
         placeholder="Procure seu dinheiro"
       />
-    </StyledLabel>
+    </StyledForm>
   );
 };
 

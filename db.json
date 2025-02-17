@@ -3,7 +3,7 @@
     {
       "id": "2c77",
       "nome": "Neilton Seguins",
-      "renda": 20250
+      "renda": 19950
     }
   ],
   "transacoes": [
@@ -54,6 +54,30 @@
       "tipo": "despesa",
       "categoria": "Lanche",
       "data": "2025-02-11"
+    },
+    {
+      "id": "d968",
+      "nome": "Livro",
+      "valor": 100,
+      "tipo": "despesa",
+      "categoria": "Estudos",
+      "data": "2025-02-05"
+    },
+    {
+      "id": "525b",
+      "nome": "Pirulito",
+      "valor": 10,
+      "tipo": "despesa",
+      "categoria": "Alimentação",
+      "data": "2025-02-04"
+    },
+    {
+      "id": "575c",
+      "nome": "Pix",
+      "valor": 100,
+      "tipo": "receita",
+      "categoria": "Pagamentos",
+      "data": "2025-02-20"
     }
   ]
 }
