@@ -9,7 +9,7 @@ import Fieldset from "../Fieldset";
 import Label from "../Label";
 import CampoTexto from "../CampoTexto";
 import { SelectGroup, SelectOption } from "../Select";
-import { useTransacoes } from "../../context/TransacoesContext";
+import { useAppContext } from "../../context/AppContext";
 import { ITransacao } from "../../types";
 import styled from "styled-components";
 
@@ -19,7 +19,6 @@ export const Container = styled(CartaoCorpo)`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  height: 535px;
 `;
 
 export const ListaMovimentacoes = styled.ul`
@@ -29,6 +28,7 @@ export const ListaMovimentacoes = styled.ul`
   padding-left: 0px;
   padding-bottom: var(--padding-m);
   width: 100%;
+  height: 535px;
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -42,7 +42,7 @@ export const ListaMovimentacoes = styled.ul`
 const Transacoes = () => {
   const modalRef = useRef<ModalHandle>(null);
 
-  const { transacoes, criarTransacao } = useTransacoes();
+  const { transacoes, criarTransacao } = useAppContext();
 
   const [novaTransacao, setNovaTransacao] = useState<Omit<ITransacao, "id">>({
     nome: "",

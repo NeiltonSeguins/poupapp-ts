@@ -3,7 +3,6 @@ export interface Usuario {
   nome: string;
   renda: number;
   orcamentoDiario: number;
-  transacoes: ITransacao[];
 }
 
 export interface ITransacao {

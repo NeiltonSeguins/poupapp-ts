@@ -1,83 +1,20 @@
 {
   "usuarios": [
     {
-      "id": "2c77",
+      "id": "fa0c",
       "nome": "Neilton Seguins",
-      "renda": 19950
+      "renda": "5000",
+      "orcamentoDiario": 166.66666666666666
     }
   ],
   "transacoes": [
     {
-      "id": "84f4",
+      "id": "b5e2",
       "nome": "Pix",
       "valor": 200,
       "tipo": "receita",
-      "categoria": "Pagamentos",
-      "data": "2025-02-11"
-    },
-    {
-      "id": "ff60",
-      "nome": "Pix",
-      "valor": 1213,
-      "tipo": "receita",
-      "categoria": "Doces",
-      "data": "2025-02-04"
-    },
-    {
-      "id": "84f6",
-      "nome": "Raquete de tênis",
-      "valor": 304,
-      "tipo": "despesa",
       "categoria": "Esportes",
-      "data": "2025-02-11"
-    },
-    {
-      "id": "150a",
-      "nome": "Raquete de tênis",
-      "valor": 200,
-      "tipo": "despesa",
-      "categoria": "Casa",
-      "data": "2025-02-17"
-    },
-    {
-      "id": "02e5",
-      "nome": "TV Smart",
-      "valor": 1000,
-      "tipo": "despesa",
-      "categoria": "Casa",
-      "data": "2025-02-17"
-    },
-    {
-      "id": "97df",
-      "nome": "Combo de pizza",
-      "valor": 100,
-      "tipo": "despesa",
-      "categoria": "Lanche",
-      "data": "2025-02-11"
-    },
-    {
-      "id": "d968",
-      "nome": "Livro",
-      "valor": 100,
-      "tipo": "despesa",
-      "categoria": "Estudos",
-      "data": "2025-02-05"
-    },
-    {
-      "id": "525b",
-      "nome": "Pirulito",
-      "valor": 10,
-      "tipo": "despesa",
-      "categoria": "Alimentação",
-      "data": "2025-02-04"
-    },
-    {
-      "id": "575c",
-      "nome": "Pix",
-      "valor": 100,
-      "tipo": "receita",
-      "categoria": "Pagamentos",
-      "data": "2025-02-20"
+      "data": "2025-02-13"
     }
   ]
 }

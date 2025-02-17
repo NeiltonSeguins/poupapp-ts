@@ -1,14 +1,14 @@
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import { Cartao, CartaoCabecalho, CartaoCorpo } from "../Cartao";
 import styled from "styled-components";
-import { useTransacoes } from "../../context/TransacoesContext";
+import { useAppContext } from "../../context/AppContext";
 
 export const AreaChart = styled.div`
   padding: var(--padding-xs);
 `;
 
 const BalancoFinanceiro = () => {
-  const { calcularGastosPorCategoria } = useTransacoes();
+  const { calcularGastosPorCategoria } = useAppContext();
   const gastosPorCategoria = calcularGastosPorCategoria();
 
   const data = Object.entries(gastosPorCategoria).map(

@@ -15,13 +15,13 @@ import Form from "../../components/Form";
 import ilustracao from "../../assets/images/ilustracao-cadastro.png";
 import { useNavigate } from "react-router-dom";
 import { Usuario } from "../../types/index.js";
-import { useUsuario } from "../../context/UsuarioContext.js";
+import { useAppContext } from "../../context/AppContext.js";
 
 type FormFields = "nome" | "renda" | "objetivoFinanceiro";
 
 const Cadastro = () => {
-  const { criarUsuario } = useUsuario();
-  const [form, setForm] = useState<Omit<Usuario, "id">>({
+  const { criarUsuario } = useAppContext();
+  const [form, setForm] = useState<Omit<Usuario, "id" | "orcamentoDiario">>({
     nome: "",
     renda: 0,
   });
