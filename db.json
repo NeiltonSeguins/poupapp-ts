@@ -15,6 +15,14 @@
       "tipo": "receita",
       "categoria": "Esportes",
       "data": "2025-02-13"
+    },
+    {
+      "id": "9c4e",
+      "nome": "Raquete de tênis",
+      "valor": 50,
+      "tipo": "despesa",
+      "categoria": "Esportes",
+      "data": "2025-02-11"
     }
   ]
 }

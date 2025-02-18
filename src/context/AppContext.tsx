@@ -20,7 +20,6 @@ interface AppContextType {
     dados: Omit<Usuario, "id" | "orcamentoDiario">
   ) => Promise<void>;
   transacoes: ITransacao[];
-  calcularGastosPorCategoria: () => Record<string, number>;
   criarTransacao: (novaTransacao: Omit<ITransacao, "id">) => Promise<void>;
 }
 
@@ -65,23 +64,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const calcularGastosPorCategoria = () => {
-    return transacoes
-      .filter((transacao) => transacao.tipo === "despesa")
-      .reduce<Record<string, number>>((acc, transacao) => {
-        acc[transacao.categoria] =
-          (acc[transacao.categoria] || 0) + transacao.valor;
-        return acc;
-      }, {});
-  };
-
   return (
     <AppContext.Provider
       value={{
         usuario,
         criarUsuario,
         transacoes,
-        calcularGastosPorCategoria,
         criarTransacao,
       }}
     >
@@ -93,7 +81,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
-    throw new Error("useAppContext deve ser usado dentro de um UsuarioProvider");
+    throw new Error(
+      "useAppContext deve ser usado dentro de um UsuarioProvider"
+    );
   }
   return context;
 };

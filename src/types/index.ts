@@ -9,7 +9,7 @@ export interface ITransacao {
   id: number;
   nome: string;
   valor: number;
-  tipo: "despesa" | "receita" | ""; //Não pode ser nulo nem uma string vazia
+  tipo: "despesa" | "receita";
   categoria: string;
   data: string;
 }
