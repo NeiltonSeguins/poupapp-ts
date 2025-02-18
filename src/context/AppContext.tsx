@@ -29,19 +29,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [transacoes, setTransacoes] = useState<ITransacao[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const users = await getUsuarios();
-        const transacoes = await getTransacoes();
-        if (users.length > 0) {
-          setUsuario(users[0]);
-          setTransacoes(transacoes);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar usuário", error);
+  const carregarDados = async () => {
+    try {
+      const users = await getUsuarios();
+      const transacoes = await getTransacoes();
+      if (users.length > 0) {
+        setUsuario(users[0]);
+        setTransacoes(transacoes);
       }
-    })();
+    } catch (error) {
+      console.error("Erro ao buscar usuário", error);
+    }
+  };
+
+  useEffect(() => {
+    carregarDados();
   }, []);
 
   const criarUsuario = async (

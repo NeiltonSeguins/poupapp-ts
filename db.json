@@ -23,6 +23,14 @@
       "tipo": "despesa",
       "categoria": "Esportes",
       "data": "2025-02-11"
+    },
+    {
+      "id": "f164",
+      "nome": "Pix",
+      "valor": 100,
+      "tipo": "despesa",
+      "categoria": "Pagamentos",
+      "data": "2025-02-13"
     }
   ]
 }
