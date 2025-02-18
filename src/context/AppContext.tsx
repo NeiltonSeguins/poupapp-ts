@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
@@ -12,6 +13,7 @@ import {
   createUsuario,
   getTransacoes,
   createTransacao,
+  updateUsuario,
 } from "../api";
 
 interface AppContextType {
@@ -65,6 +67,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       console.error("Erro ao criar transação", error);
     }
   };
+
+  useEffect(() => {
+    if (!usuario) return;
+
+    const saldo = transacoes.reduce((total, transacao) => {
+      return transacao.tipo === "receita"
+        ? total + transacao.valor
+        : total - transacao.valor;
+    }, 0);
+
+    const novoOrcamentoDiario = usuario.renda / 30 + saldo;
+
+    updateUsuario(usuario.id, { orcamentoDiario: novoOrcamentoDiario })
+      .then((usuarioAtualizado) => setUsuario(usuarioAtualizado))
+      .catch((error) => console.error("Erro ao atualizar orçamento", error));
+  }, [transacoes]);
 
   return (
     <AppContext.Provider

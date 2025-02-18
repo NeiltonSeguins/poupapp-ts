@@ -1,36 +1,28 @@
 {
   "usuarios": [
     {
-      "id": "fa0c",
+      "id": "c5aa",
       "nome": "Neilton Seguins",
       "renda": "5000",
-      "orcamentoDiario": 166.66666666666666
+      "orcamentoDiario": 116.66666666666666
     }
   ],
   "transacoes": [
     {
-      "id": "b5e2",
+      "id": "51b6",
       "nome": "Pix",
-      "valor": 200,
-      "tipo": "receita",
-      "categoria": "Esportes",
-      "data": "2025-02-13"
-    },
-    {
-      "id": "9c4e",
-      "nome": "Raquete de tênis",
       "valor": 50,
-      "tipo": "despesa",
-      "categoria": "Esportes",
-      "data": "2025-02-11"
-    },
-    {
-      "id": "f164",
-      "nome": "Pix",
-      "valor": 100,
-      "tipo": "despesa",
+      "tipo": "receita",
       "categoria": "Pagamentos",
       "data": "2025-02-13"
+    },
+    {
+      "id": "c892",
+      "nome": "Raquete de tênis",
+      "valor": 100,
+      "tipo": "despesa",
+      "categoria": "Esportes",
+      "data": "2025-02-12"
     }
   ]
 }
