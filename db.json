@@ -1,39 +1,30 @@
 {
   "usuarios": [
     {
-      "id": "c841",
+      "id": "5b9e",
       "nome": "Neilton Seguins",
       "renda": "5000",
-      "orcamentoDiario": 196.66666666666666
+      "orcamentoDiario": 216.66666666666666
     }
   ],
   "transacoes": [
     {
-      "id": "94dc",
+      "id": "e220",
       "nome": "Pix",
-      "valor": 200,
+      "valor": 100,
       "tipo": "receita",
       "categoria": "Pagamentos",
-      "data": "2025-02-01",
-      "userId": "c841"
+      "data": "2025-02-18",
+      "userId": "5b9e"
     },
     {
-      "id": "64ea",
-      "nome": "Raquete de tênis",
-      "valor": 70,
+      "id": "8786",
+      "nome": "Pix",
+      "valor": 50,
       "tipo": "despesa",
-      "categoria": "Esportes",
-      "data": "2025-02-21",
-      "userId": "c841"
-    },
-    {
-      "id": "2ae5",
-      "nome": "Combo de pizza",
-      "valor": 100,
-      "tipo": "despesa",
-      "categoria": "Lanche",
-      "data": "2025-02-07",
-      "userId": "c841"
+      "categoria": "Pagamentos",
+      "data": "2025-02-06",
+      "userId": "5b9e"
     }
   ]
 }

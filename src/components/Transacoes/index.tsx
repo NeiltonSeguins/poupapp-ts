@@ -44,10 +44,10 @@ const Transacoes = () => {
 
   const { transacoes, criarTransacao } = useAppContext();
 
-  const [novaTransacao, setNovaTransacao] = useState<Omit<ITransacao, "id">>({
+  const [novaTransacao, setNovaTransacao] = useState<Omit<ITransacao, "id" | "userId">>({
     nome: "",
     valor: 0,
-    tipo: "",
+    tipo: "receita",
     categoria: "",
     data: "",
   });
@@ -65,7 +65,7 @@ const Transacoes = () => {
       setNovaTransacao({
         nome: "",
         valor: 0,
-        tipo: "",
+        tipo: "receita",
         categoria: "",
         data: "",
       });
