@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
@@ -13,7 +12,6 @@ import {
   createUsuario,
   getTransacoes,
   createTransacao,
-  updateUsuario,
 } from "../api";
 
 interface AppContextType {
@@ -22,7 +20,9 @@ interface AppContextType {
     dados: Omit<Usuario, "id" | "orcamentoDiario">
   ) => Promise<void>;
   transacoes: ITransacao[];
-  criarTransacao: (novaTransacao: Omit<ITransacao, "id">) => Promise<void>;
+  criarTransacao: (
+    novaTransacao: Omit<ITransacao, "id" | "userId">
+  ) => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -59,30 +59,29 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const criarTransacao = async (novaTransacao: Omit<ITransacao, "id">) => {
+  const criarTransacao = async (
+    novaTransacao: Omit<ITransacao, "id" | "userId">
+  ) => {
     try {
-      const transacaoCriada = await createTransacao(novaTransacao);
-      setTransacoes((prev) => [...prev, transacaoCriada]);
+      if (!usuario) {
+        throw new Error(
+          "Não podemos criar transações sem um usuário associado"
+        );
+      }
+
+      const { transacao, novoOrcamentoDiario } = await createTransacao(
+        novaTransacao,
+        usuario
+      );
+
+      setTransacoes((prev) => [...prev, transacao]);
+      setUsuario((prev) =>
+        prev ? { ...prev, orcamentoDiario: novoOrcamentoDiario } : null
+      );
     } catch (error) {
       console.error("Erro ao criar transação", error);
     }
   };
-
-  useEffect(() => {
-    if (!usuario) return;
-
-    const saldo = transacoes.reduce((total, transacao) => {
-      return transacao.tipo === "receita"
-        ? total + transacao.valor
-        : total - transacao.valor;
-    }, 0);
-
-    const novoOrcamentoDiario = usuario.renda / 30 + saldo;
-
-    updateUsuario(usuario.id, { orcamentoDiario: novoOrcamentoDiario })
-      .then((usuarioAtualizado) => setUsuario(usuarioAtualizado))
-      .catch((error) => console.error("Erro ao atualizar orçamento", error));
-  }, [transacoes]);
 
   return (
     <AppContext.Provider
@@ -101,9 +100,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
-    throw new Error(
-      "useAppContext deve ser usado dentro de um UsuarioProvider"
-    );
+    throw new Error("useAppContext deve ser usado dentro de um AppProvider");
   }
   return context;
 };

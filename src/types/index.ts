@@ -12,4 +12,5 @@ export interface ITransacao {
   tipo: "despesa" | "receita";
   categoria: string;
   data: string;
+  userId: number;
 }
